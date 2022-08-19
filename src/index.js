@@ -1,15 +1,12 @@
 import express from 'express'
 import chalk from "chalk";
-import {dirname} from 'path'
-import {fileURLToPath} from 'url'
 import Pool from 'pg-pool'
 import router from "./router.js";
+import cors from "cors";
 
 const app = express()
 const PORT = process.env.PORT || 5000
 const _URL = 'postgres://sdoliyadjjbcsp:6cfa03e3ef5f5a240d58f8adfab0e10b3a1b22c7b866e9ee567814698ef3583d@ec2-54-155-110-181.eu-west-1.compute.amazonaws.com:5432/d601tpm4h1m5m4'
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 export const pool = new Pool({
     connectionString: _URL, ssl: {
@@ -27,7 +24,7 @@ app.listen(PORT, () => {
     console.groupEnd()
 })
 
-app.get('/', router)
-app.get('/test', router)
-app.get('/notes', router)
-app.get('/notes/:id', router)
+app.get('/', cors(), router)
+app.get('/test',  cors(), router)
+app.get('/notes',  cors(), router)
+app.get('/notes/:id',  cors(), router)
