@@ -14,8 +14,16 @@ export const pool = new Pool({
     }
 });
 
+let corsOptions = {
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+}
+
 // LISTENING
 console.clear()
+app.use(cors(corsOptions))
 app.listen(PORT, () => {
     console.group()
     console.log(chalk.greenBright(`================================`))
@@ -25,6 +33,9 @@ app.listen(PORT, () => {
 })
 
 app.get('/', cors(), router)
-app.get('/test',  cors(), router)
-app.get('/notes',  cors(), router)
-app.get('/notes/:id',  cors(), router)
+app.get('/test', cors(), router)
+
+app.get('/notes', cors(), router)
+app.get('/notes/:id', cors(), router)
+
+app.post('/notes', cors(), router)
