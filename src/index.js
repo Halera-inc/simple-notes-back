@@ -32,7 +32,7 @@ app.listen(PORT, () => {
     console.groupEnd()
 })
 
-app.get('/', cors(), router)
-app.get('/test', cors(), router)
-app.get('/notes', cors(), router)
-app.get('/notes/:id', cors(), router)
+app.get('/', router)
+app.get('/test', router)
+app.get('/notes', router)
+app.get('/notes/:id', router)
