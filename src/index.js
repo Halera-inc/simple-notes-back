@@ -37,5 +37,6 @@ app.get('/test', cors(), router)
 
 app.get('/notes', cors(), router)
 app.get('/notes/:id', cors(), router)
-
 app.post('/notes', cors(), router)
+app.put('/notes/:id', cors(), router)
+app.delete('/notes/:id', cors(), router)
