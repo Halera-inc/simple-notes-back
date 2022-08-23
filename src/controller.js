@@ -23,8 +23,6 @@ class Controller {
         }
     }
 
-
-
     async createNote(req, res) {
         try {
             const targetId = req.params.id

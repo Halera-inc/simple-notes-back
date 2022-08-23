@@ -1,6 +1,7 @@
 import Router from 'express'
 import Controller from "./controller.js";
 import ControllerNotes from "./controllerNotes.js";
+import ControllerUsers from "./controllerUsers.js";
 
 const router = new Router()
 
@@ -14,5 +15,7 @@ router.post('/notes', ControllerNotes.createNote)
 router.put('/notes/:id', ControllerNotes.updateNote)
 router.delete('/notes/:id', ControllerNotes.deleteNote)
 router.post('/notes', Controller.createNote)
+
+router.get('/users', ControllerUsers.getAllUsers)
 
 export default router
