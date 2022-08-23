@@ -24,4 +24,6 @@ router.put('/users/:id', ControllerUsers.updateTargetUser)
 router.put('/users/:id/changePassword', ControllerUsers.updateUserPassword)
 router.delete('/users/:id', ControllerUsers.deleteTargetUser)
 
+router.get('/users/:id/notes', ControllerUsers.getUserNotes)
+
 export default router

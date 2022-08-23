@@ -47,3 +47,5 @@ app.post('/users', cors(), router)
 app.put('/users/:id', cors(), router)
 app.put('/users/:id/changePassword', cors(), router)
 app.delete('/users/:id', cors(), router)
+
+app.get('/users/:id/notes', cors(), router)
