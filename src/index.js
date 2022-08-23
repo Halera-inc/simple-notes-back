@@ -42,3 +42,4 @@ app.put('/notes/:id', cors(), router)
 app.delete('/notes/:id', cors(), router)
 
 app.get('/users', cors(), router)
+app.post('/users', cors(), router)

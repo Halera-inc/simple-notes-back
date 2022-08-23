@@ -17,5 +17,6 @@ router.delete('/notes/:id', ControllerNotes.deleteNote)
 router.post('/notes', Controller.createNote)
 
 router.get('/users', ControllerUsers.getAllUsers)
+router.post('/users', ControllerUsers.createUser)
 
 export default router
