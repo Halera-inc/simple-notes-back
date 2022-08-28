@@ -1,6 +1,5 @@
 import express from 'express'
 import chalk from "chalk";
-import Pool from 'pg-pool'
 import router from "./router.js";
 import cors from "cors";
 
