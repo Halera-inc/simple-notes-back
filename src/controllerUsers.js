@@ -1,13 +1,13 @@
+import User from '../models/User.js'
+import {v4 as uuidv4} from 'uuid';
+
 
 class ControllerUsers {
 
     async getAllUsers(req, res) {
         try {
-            const client = await pool.connect();
-            const result = await client.query(`SELECT * FROM users`);
-            const results = {'results': (result) ? result.rows : null};
-            res.send(results)
-            client.release();
+            const users = await User.find();
+            res.send(users)
         } catch (err) {
             res.status(400)
             console.error(err);
@@ -32,22 +32,20 @@ class ControllerUsers {
 
     async createUser(req, res) {
         try {
-            const client = await pool.connect();
 
             const username = req.query.username
             const email = req.query.email
             const country = req.query.country
             const password = req.query.password
+            const token = uuidv4()
 
-            const result = await client.query(
-                `
-                INSERT INTO users (username, email, country, userpassword)
-                VALUES ('${username}', '${email}', '${country}', '${password}');
-                `
-            );
-            const results = {'results': (result) ? result.rows : null};
-            res.send(results)
-            client.release();
+            const user = await User.create(
+                {username, email, country, password, token}
+            )
+            //записать token в localStorage после первого логина
+            //finduserbyToken
+            //logout удаляется token
+            res.send(user)
         } catch (err) {
             res.status(400)
             console.error(err);

@@ -15,7 +15,7 @@ router.get('/notes/:id', ControllerNotes.getTargetNote)
 router.post('/notes', ControllerNotes.createNote)
 router.put('/notes/:id', ControllerNotes.updateNote)
 router.delete('/notes/:id', ControllerNotes.deleteNote)
-router.post('/notes', Controller.createNote)
+// router.post('/notes', Controller.createNote)
 
 router.get('/users', ControllerUsers.getAllUsers)
 router.get('/users/:id', ControllerUsers.getTargetUser)

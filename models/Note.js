@@ -1,14 +1,21 @@
 import mongoose from "mongoose";
+import User from "./User.js";
 
 const Schema = mongoose.Schema
 
 const NoteSchema = new Schema({
-    title: {type: String, required: true},
-    notetext: {type: String},
-    color: {type: String},
-    notemode: {type: String},
+    title: {type: String},
+    note_text: {type: String},
+    color: {
+        type: String,
+        enum: [
+            'default,', 'dark', 'green', 'blue', 'mustard', 'violet'
+        ],
+        default: 'default'
+    },
+    note_mode: {type: String, enum: ['NoteText', 'NoteTodo']},
     createdAt: {type: Date, default: () => Date.now(), immutable: true},
-    userid: {type: mongoose.SchemaTypes.ObjectId}
+    user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User'}
 })
 
-module.exports = mongoose.model('Note', NoteSchema)
+export default mongoose.model('Note', NoteSchema)

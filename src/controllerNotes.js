@@ -1,16 +1,11 @@
+import Note from '../models/Note.js'
 
 class ControllerNotes {
 
     async getAllNotes(req, res) {
         try {
-            const client = await pool.connect();
-            const result = await client.query(
-                `
-                SELECT * FROM notes;
-                `);
-            const results = {'results': (result) ? result.rows : null};
-            res.send(results)
-            client.release();
+            const notes = await Note.find()
+            res.send(notes)
         } catch (err) {
             res.status(400)
             console.error(err);
@@ -21,11 +16,7 @@ class ControllerNotes {
     async getTargetNote(req, res) {
         try {
             const targetId = req.params.id
-            const client = await pool.connect();
-            const result = await client.query(
-                `
-                SELECT * FROM notes WHERE id=${targetId};
-                `);
+            const selectedNote = await Note.findById(targetId);
             const results = {'results': (result) ? result.rows : null};
             res.send(results)
             client.release();
@@ -38,16 +29,18 @@ class ControllerNotes {
 
     async createNote(req, res) {
         try {
-            let newTitle = req.query.title
-            let noteText = req.query.text
-            const client = await pool.connect();
-            const result = await client.query(
-                `
-                INSERT INTO notes (title, noteText, color, noteMode) VALUES ('${newTitle}', '${noteText}', 'default', 'NoteText');
-                `);
-            const results = {'results': (result) ? result.rows : null};
-            res.send(results)
-            client.release();
+            let newTitle = req.body.title
+            console.log(newTitle)
+            // let noteText = req.query.text
+            // const client = await pool.connect();
+            // const result = await client.query(
+            //     `
+            //     INSERT INTO notes (title, noteText, color, noteMode) VALUES ('${newTitle}', '${noteText}', 'default', 'NoteText');
+            //     `);
+            // const results = {'results': (result) ? result.rows : null};
+
+            const newNote = await Note.create({title: newTitle})
+            res.send(newNote)
         } catch (err) {
             res.status(400)
             console.error(err);

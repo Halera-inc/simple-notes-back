@@ -2,34 +2,41 @@ import express from 'express'
 import chalk from "chalk";
 import router from "./router.js";
 import cors from "cors";
+import mongoose from "mongoose";
+import * as dotenv from 'dotenv'
 
+dotenv.config()
+const PORT = process.env.PORT || 5050
+const _URL = process.env.MONGO_URL || `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_DB}.clujbpt.mongodb.net/simple_notes?retryWrites=true&w=majority`
+
+// let corsOptions = {
+//     "origin": "*",
+//     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     "preflightContinue": false,
+//     "optionsSuccessStatus": 204
+// }
 const app = express()
-const PORT = process.env.PORT || 5000
-const _URL = 'postgres://sdoliyadjjbcsp:6cfa03e3ef5f5a240d58f8adfab0e10b3a1b22c7b866e9ee567814698ef3583d@ec2-54-155-110-181.eu-west-1.compute.amazonaws.com:5432/d601tpm4h1m5m4'
+app.use(express.json())
+app.use(cors())
 
-export const pool = new Pool({
-    connectionString: _URL, ssl: {
-        rejectUnauthorized: false
+async function startApp() {
+    try {
+        await mongoose.connect(_URL)
+        console.clear()
+        app.listen(PORT, () => {
+            console.group()
+            console.log(chalk.greenBright(`================================`))
+            console.log(chalk.greenBright(`== SERVER STARTED ON PORT ${PORT} == `))
+            console.log(chalk.greenBright(`================================`))
+            console.groupEnd()
+        })
+    } catch (e) {
+        console.log(e.message)
     }
-});
-
-let corsOptions = {
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
 }
 
 // LISTENING
-console.clear()
-app.use(cors(corsOptions))
-app.listen(PORT, () => {
-    console.group()
-    console.log(chalk.greenBright(`================================`))
-    console.log(chalk.greenBright(`== SERVER STARTED ON PORT ${PORT} == `))
-    console.log(chalk.greenBright(`================================`))
-    console.groupEnd()
-})
+
 
 app.get('/', cors(), router)
 app.get('/test', cors(), router)
@@ -48,3 +55,5 @@ app.put('/users/:id/changePassword', cors(), router)
 app.delete('/users/:id', cors(), router)
 
 app.get('/users/:id/notes', cors(), router)
+
+startApp()
