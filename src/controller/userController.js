@@ -2,27 +2,12 @@ import User from '../models/User.js'
 import {v4 as uuidv4} from 'uuid';
 
 
-class ControllerUsers {
+class UserController {
 
     async getAllUsers(req, res) {
         try {
             const users = await User.find();
             res.send(users)
-        } catch (err) {
-            res.status(400)
-            console.error(err);
-            res.send("Error " + err);
-        }
-    }
-
-    async getTargetUser(req, res) {
-        try {
-            const client = await pool.connect();
-            const userId = req.params.id
-            const result = await client.query(`SELECT * FROM users WHERE id = ${userId}`);
-            const results = {'results': (result) ? result.rows : null};
-            res.send(results)
-            client.release();
         } catch (err) {
             res.status(400)
             console.error(err);
@@ -126,26 +111,6 @@ class ControllerUsers {
             res.send("Error " + err);
         }
     }
-
-    async getUserNotes(req, res) {
-        try {
-            const client = await pool.connect();
-            const userId = req.params.id
-            const result = await client.query(
-                `
-                    SELECT notes.id, notes.title, notes.notetext, notes.color, notes.notemode, notes.dateofcreated FROM users, notes
-                    WHERE users.id = notes.userid AND users.id = ${userId}
-                    ORDER BY notes.id ASC;
-                `);
-            const results = {'results': (result) ? result.rows : null};
-            res.send(results)
-            client.release();
-        } catch (err) {
-            res.status(400)
-            console.error(err);
-            res.send("Error " + err);
-        }
-    }
 }
 
-export default new ControllerUsers();
+export default new UserController();

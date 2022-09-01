@@ -1,8 +1,9 @@
 # 📝 Simple Note - Backend
 
 ### Stack:  
-* nodejs
-* express
-* postgreSQL
+* Nodejs
+* Express
+* Mongoose
+* MongoDB
 
 🔗 API: 

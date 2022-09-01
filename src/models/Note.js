@@ -13,7 +13,7 @@ const NoteSchema = new Schema({
         ],
         default: 'default'
     },
-    note_mode: {type: String, enum: ['NoteText', 'NoteTodo']},
+    note_mode: {type: String, enum: ['note_text', 'note_todo'], default: 'note_text'},
     createdAt: {type: Date, default: () => Date.now(), immutable: true},
     user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User'}
 })

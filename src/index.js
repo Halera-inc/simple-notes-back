@@ -37,7 +37,6 @@ async function startApp() {
 
 // LISTENING
 
-
 app.get('/', cors(), router)
 app.get('/test', cors(), router)
 
@@ -55,5 +54,7 @@ app.put('/users/:id/changePassword', cors(), router)
 app.delete('/users/:id', cors(), router)
 
 app.get('/users/:id/notes', cors(), router)
+
+app.use('/auth', router)
 
 startApp()

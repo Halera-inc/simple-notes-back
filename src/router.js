@@ -1,29 +1,31 @@
 import Router from 'express'
-import Controller from "./controller.js";
-import ControllerNotes from "./controllerNotes.js";
-import ControllerUsers from "./controllerUsers.js";
-import cors from "cors";
+import Controller from "./controller/testController.js";
+import testController from "./controller/testController.js";
+import notesController from "./controller/notesController.js";
+import userController from "./controller/userController.js";
+import ControllerAuth from "./controller/authController.js";
+import {verifyUser} from "./middleware/authMiddleware.js";
 
 const router = new Router()
 
 router.get('/', Controller.home)
-router.get('/test', Controller.getTest)
+router.get('/test', testController.getTest)
 
-
-router.get('/notes', ControllerNotes.getAllNotes)
-router.get('/notes/:id', ControllerNotes.getTargetNote)
-router.post('/notes', ControllerNotes.createNote)
-router.put('/notes/:id', ControllerNotes.updateNote)
-router.delete('/notes/:id', ControllerNotes.deleteNote)
+router.get('/notes', verifyUser, notesController.getAllNotes)
+router.get('/notes/:id', verifyUser, notesController.getTargetNote)
+router.post('/notes', verifyUser, notesController.createNote)
+router.put('/notes/:id', verifyUser, notesController.updateNote)
+router.delete('/notes/:id', verifyUser, notesController.deleteNote)
 // router.post('/notes', Controller.createNote)
 
-router.get('/users', ControllerUsers.getAllUsers)
-router.get('/users/:id', ControllerUsers.getTargetUser)
-router.post('/users', ControllerUsers.createUser)
-router.put('/users/:id', ControllerUsers.updateTargetUser)
-router.put('/users/:id/changePassword', ControllerUsers.updateUserPassword)
-router.delete('/users/:id', ControllerUsers.deleteTargetUser)
+router.put('/users/:id', userController.updateTargetUser)
+router.put('/users/:id/changePassword', userController.updateUserPassword)
+router.delete('/users/:id', userController.deleteTargetUser)
 
-router.get('/users/:id/notes', ControllerUsers.getUserNotes)
+router.post('/registration', ControllerAuth.registration)
+router.post('/login', ControllerAuth.login)
+router.delete('/logout', ControllerAuth.logout)
+router.get('/me', verifyUser,  ControllerAuth.me)
+
 
 export default router
