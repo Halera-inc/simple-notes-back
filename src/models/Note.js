@@ -9,7 +9,7 @@ const NoteSchema = new Schema({
     color: {
         type: String,
         enum: [
-            'default,', 'dark', 'green', 'blue', 'mustard', 'violet'
+            'default', 'dark', 'green', 'blue', 'mustard', 'violet'
         ],
         default: 'default'
     },

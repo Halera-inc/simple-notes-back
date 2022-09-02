@@ -46,14 +46,10 @@ app.post('/notes', cors(), router)
 app.put('/notes/:id', cors(), router)
 app.delete('/notes/:id', cors(), router)
 
-app.get('/users', cors(), router)
-app.get('/users/:id', cors(), router)
-app.post('/users', cors(), router)
-app.put('/users/:id', cors(), router)
-app.put('/users/:id/changePassword', cors(), router)
-app.delete('/users/:id', cors(), router)
-
-app.get('/users/:id/notes', cors(), router)
+app.get('/user', cors(), router)
+app.put('/user', cors(), router)
+app.put('/user/changePassword', cors(), router)
+// app.delete('/user', cors(), router)
 
 app.use('/auth', router)
 
