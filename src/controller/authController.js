@@ -38,7 +38,7 @@ class AuthController {
                 return res.status(400).json({message: `Email or Password incorrect`})
             }
             const token = generateAccessToken(user._id)
-            return res.json({token})
+            return res.json({token, user})
         } catch (e) {
             res.status(400)
             console.error(e);
