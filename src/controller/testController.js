@@ -9,7 +9,6 @@ class TestController {
     async getTest(req, res) {
         try {
             const result = await Test.find()
-            console.log()
             res.json(result[0].test)
         } catch (err) {
             res.status(400)

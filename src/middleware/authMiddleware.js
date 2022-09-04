@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import {secret} from "../../config.js"
 
 
-export function verifyUser (req, res, next) {
+export function verifyUser(req, res, next) {
     if (req.method === 'OPTIONS') {
         next()
     }

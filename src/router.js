@@ -18,7 +18,7 @@ router.put('/notes/:id', verifyUser, notesController.updateNote)
 router.delete('/notes/:id', verifyUser, notesController.deleteNote)
 // router.post('/notes', Controller.createNote)
 
-router.put('/user', userController.updateTargetUser)
+router.put('/user', verifyUser, userController.updateUser)
 router.put('/user/changePassword', userController.updateUserPassword)
 // router.delete('/users/:id', userController.deleteTargetUser)
 
