@@ -3,6 +3,8 @@ import {secret} from "../../config.js"
 
 
 export function verifyUser(req, res, next) {
+    const url = req.url
+    console.log(url)
     if (req.method === 'OPTIONS') {
         next()
     }
