@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     // token: {type: String, required: true},
     email: {
         type: String,
-        required: false,
+        required: true,
         lowercase: true,
         minLength: 5,
         trim: true,

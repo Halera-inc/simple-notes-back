@@ -51,7 +51,7 @@ class UserController {
                     email,
                     country
                 }
-            }, {runValidators: true})
+            }, )
             return res.json(updatedUser)
 
         } catch (e) {
